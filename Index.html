@@ -1,0 +1,1168 @@
+Here is the updated HTML file with the name changed to Pagalpan Trading Pro.
+
+```html
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
+<title>🇮🇳 PAGALPAN TRADING PRO</title>
+<link href="" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#040810;--bg2:#070d1a;--card:#0a1120;--card2:#0d1628;
+  --border:#182840;--border2:#1e3050;
+  --cyan:#00f3ff;--green:#00ff87;--red:#ff3e6c;
+  --gold:#ffd700;--purple:#bf5af2;--orange:#ff9f0a;--blue:#5b8dee;
+  --text:#d0e4f8;--dim:#5a7a9e;--muted:#2a3f5e;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{font-size:14px;}
+body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 15% 15%,rgba(0,243,255,.04),transparent 55%),radial-gradient(ellipse at 85% 85%,rgba(191,90,242,.03),transparent 55%);pointer-events:none;z-index:0;}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:3px;height:3px;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;}
+
+/* ── HEADER ── */
+.hdr{position:sticky;top:0;z-index:200;background:rgba(4,8,16,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:8px 12px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Orbitron',monospace;font-size:14px;font-weight:900;color:var(--cyan);text-shadow:0 0 16px rgba(0,243,255,.5);letter-spacing:2px;}
+.logo em{color:var(--gold);font-style:normal;}
+.hdr-right{display:flex;align-items:center;gap:8px;}
+.live-dot{display:flex;align-items:center;gap:5px;background:rgba(0,255,135,.1);border:1px solid rgba(0,255,135,.3);border-radius:20px;padding:3px 9px;font-size:10px;color:var(--green);font-weight:700;}
+.live-dot::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+.mkt-badge{font-size:10px;padding:3px 8px;border-radius:4px;font-weight:700;}
+.open{background:rgba(0,255,135,.1);color:var(--green);border:1px solid rgba(0,255,135,.25);}
+.closed{background:rgba(255,62,108,.1);color:var(--red);border:1px solid rgba(255,62,108,.25);}
+#clock{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--cyan);}
+
+/* ── TABS ── */
+.tabs-wrap{background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;display:flex;scrollbar-width:none;}
+.tabs-wrap::-webkit-scrollbar{display:none;}
+.tab{padding:9px 13px;font-size:11px;font-weight:600;color:var(--dim);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .25s;letter-spacing:.4px;flex-shrink:0;}
+.tab.on{color:var(--cyan);border-bottom-color:var(--cyan);background:rgba(0,243,255,.04);}
+
+/* ── PANELS ── */
+.panel{display:none;padding:10px;animation:fadeIn .25s ease;}
+.panel.on{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── SECTION TITLE ── */
+.stitle{font-family:'Orbitron',monospace;font-size:10px;font-weight:700;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.stitle::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
+
+/* ── CARDS ── */
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;}
+.card2{background:var(--card2);border:1px solid var(--border);border-radius:8px;}
+
+/* ── INDEX GRID ── */
+.idx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;}
+.idx-card{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:8px;text-align:center;position:relative;overflow:hidden;cursor:pointer;transition:border-color .3s;}
+.idx-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.idx-card.bull{border-color:rgba(0,255,135,.3);}
+.idx-card.bull::before{background:linear-gradient(90deg,transparent,var(--green),transparent);}
+.idx-card.bear{border-color:rgba(255,62,108,.3);}
+.idx-card.bear::before{background:linear-gradient(90deg,transparent,var(--red),transparent);}
+.idx-name{font-size:9px;color:var(--dim);letter-spacing:.8px;text-transform:uppercase;margin-bottom:3px;}
+.idx-price{font-family:'Share Tech Mono',monospace;font-size:15px;font-weight:700;color:#fff;margin-bottom:2px;}
+.idx-chg{font-size:10px;font-weight:700;}
+.idx-range{font-size:8px;color:var(--muted);margin-top:2px;}
+.bull-txt{color:var(--green);}
+.bear-txt{color:var(--red);}
+.neutral-txt{color:var(--gold);}
+
+/* ── SIGNAL CARD ── */
+.sig-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px;}
+.sig-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.sig-idx{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--cyan);}
+.final-sig{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;padding:8px 14px;border-radius:8px;text-align:center;margin-bottom:10px;}
+.sig-buy{background:rgba(0,255,135,.08);color:var(--green);border:1px solid rgba(0,255,135,.35);box-shadow:0 0 18px rgba(0,255,135,.08);}
+.sig-sell{background:rgba(255,62,108,.08);color:var(--red);border:1px solid rgba(255,62,108,.35);box-shadow:0 0 18px rgba(255,62,108,.08);}
+.sig-wait{background:rgba(255,215,0,.06);color:var(--gold);border:1px solid rgba(255,215,0,.25);}
+
+/* ── INDICATOR GRID ── */
+.ind-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:10px;}
+.ind-box{background:var(--card2);border:1px solid var(--border);border-radius:7px;padding:7px;}
+.ind-lbl{font-size:9px;color:var(--dim);margin-bottom:2px;display:flex;align-items:center;gap:3px;}
+.ind-dot{width:6px;height:6px;border-radius:50%;display:inline-block;flex-shrink:0;}
+.ind-val{font-family:'Share Tech Mono',monospace;font-size:12px;font-weight:700;color:#fff;}
+.ind-st{font-size:9px;margin-top:1px;}
+
+/* ── VOTE BAR ── */
+.vote-wrap{margin-bottom:10px;}
+.vote-lbl{display:flex;justify-content:space-between;font-size:10px;margin-bottom:3px;}
+.vote-bar{height:7px;background:var(--card2);border-radius:10px;overflow:hidden;display:flex;}
+.vote-b{background:linear-gradient(90deg,#00ff87,#00c96e);border-radius:10px 0 0 10px;transition:width .8s;}
+.vote-r{background:linear-gradient(90deg,#ff3e6c,#cc2a52);flex:1;border-radius:0 10px 10px 0;}
+
+/* ── LEVELS ── */
+.lvls-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;}
+.lvl-box{background:var(--card2);border-radius:6px;padding:6px;text-align:center;}
+.lvl-lbl{font-size:8px;color:var(--dim);letter-spacing:.5px;}
+.lvl-val{font-family:'Share Tech Mono',monospace;font-size:12px;font-weight:700;}
+.r-col{color:var(--green);}
+.s-col{color:var(--red);}
+.p-col{color:var(--cyan);}
+
+/* ── PCR GAUGE ── */
+.pcr-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px;}
+.pcr-num{font-family:'Orbitron',monospace;font-size:32px;font-weight:900;text-align:center;margin:6px 0;}
+.pcr-gauge{width:100%;height:10px;background:linear-gradient(90deg,var(--green),var(--gold),var(--red));border-radius:8px;position:relative;margin:8px 0;}
+.pcr-ptr{position:absolute;top:-5px;width:18px;height:18px;background:#fff;border-radius:50%;border:2.5px solid #000;transform:translateX(-50%);transition:left .8s;box-shadow:0 0 8px var(--cyan);}
+
+/* ── OPTIONS TABLE ── */
+.opt-table{width:100%;border-collapse:collapse;font-size:10px;}
+.opt-table th{padding:5px 4px;text-align:right;color:var(--dim);border-bottom:1px solid var(--border);font-size:9px;}
+.opt-table th:first-child{text-align:center;}
+.opt-table td{padding:4px;text-align:right;border-bottom:1px solid rgba(24,40,64,.5);}
+.opt-table td.strike{text-align:center;font-weight:700;color:var(--gold);}
+.opt-table tr.atm{background:rgba(255,215,0,.06);}
+.opt-table tr.atm td{border-top:1px solid rgba(255,215,0,.3);border-bottom:1px solid rgba(255,215,0,.3);}
+
+/* ── FII DII ── */
+.fii-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.fii-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px;}
+.fii-title{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;}
+.fii-amt{font-family:'Share Tech Mono',monospace;font-size:18px;font-weight:700;}
+.fii-row{display:flex;justify-content:space-between;font-size:9px;margin-top:5px;}
+
+/* ── NEWS ── */
+.news-item{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:10px;margin-bottom:8px;display:flex;gap:8px;}
+.news-icon{width:36px;height:36px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.news-src{font-size:9px;color:var(--cyan);font-weight:700;letter-spacing:.4px;}
+.news-hl{font-size:11px;color:var(--text);margin:3px 0;line-height:1.45;}
+.news-meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+.news-time{font-size:9px;color:var(--dim);}
+.imp-badge{font-size:8px;font-weight:700;padding:2px 6px;border-radius:4px;}
+.imp-hi{background:rgba(255,62,108,.12);color:var(--red);}
+.imp-md{background:rgba(255,215,0,.12);color:var(--gold);}
+.imp-lo{background:rgba(0,255,135,.12);color:var(--green);}
+.ai-result{margin-top:8px;padding-top:8px;border-top:1px solid var(--border);}
+.ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:6px 0;}
+.ai-box{background:var(--card2);border-radius:6px;padding:7px;}
+.ai-box-lbl{font-size:8px;color:var(--gold);font-weight:700;letter-spacing:.8px;margin-bottom:3px;}
+.ai-box-txt{font-size:10px;color:var(--dim);line-height:1.5;}
+.reco-bar{display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:7px;margin-top:6px;}
+
+/* ── SCORE ARC ── */
+.arc-wrap{text-align:center;flex-shrink:0;}
+
+/* ── SECTOR GRID ── */
+.sector-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:10px;}
+.sec-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px;display:flex;justify-content:space-between;align-items:center;}
+.sec-name{font-size:11px;font-weight:600;}
+.sec-chg{font-family:'Share Tech Mono',monospace;font-size:13px;font-weight:700;}
+.sec-bar-wrap{width:100%;height:3px;background:var(--border);border-radius:2px;margin-top:3px;overflow:hidden;}
+.sec-bar{height:100%;border-radius:2px;transition:width .5s;}
+
+/* ── PRO TRADER TABLE ── */
+.pro-table{width:100%;border-collapse:collapse;font-size:10px;}
+.pro-table th{padding:5px 6px;text-align:left;color:var(--dim);border-bottom:1px solid var(--border);font-size:9px;}
+.pro-table td{padding:5px 6px;border-bottom:1px solid rgba(24,40,64,.4);}
+.badge{padding:2px 7px;border-radius:4px;font-size:9px;font-weight:700;}
+.b-long{background:rgba(0,255,135,.12);color:var(--green);}
+.b-short{background:rgba(255,62,108,.12);color:var(--red);}
+.b-flat{background:rgba(255,215,0,.12);color:var(--gold);}
+
+/* ── STRAT GRID ── */
+.strat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:5px;margin-bottom:10px;}
+.strat-item{background:var(--card);border:1px solid var(--border);border-radius:7px;padding:7px;display:flex;align-items:center;gap:7px;}
+.strat-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;flex-shrink:0;}
+.strat-n{font-size:10px;font-weight:700;color:#fff;}
+.strat-r{font-size:8px;font-weight:600;margin-top:1px;}
+
+/* ── COMM ROW ── */
+.comm-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;}
+.comm-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px;text-align:center;}
+.comm-n{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;}
+.comm-p{font-family:'Share Tech Mono',monospace;font-size:13px;font-weight:700;color:var(--gold);}
+.comm-c{font-size:9px;margin-top:1px;}
+
+/* ── HERO ZERO ALERTS ── */
+.hz-alert{background:var(--card);border-left:3px solid;border-radius:0 8px 8px 0;padding:9px 10px;margin-bottom:6px;}
+.hz-buy{border-color:var(--green);}
+.hz-sell{border-color:var(--red);}
+.hz-info{border-color:var(--cyan);}
+.hz-title{font-size:11px;font-weight:700;margin-bottom:2px;}
+.hz-body{font-size:10px;color:var(--dim);line-height:1.5;}
+.hz-time{font-size:9px;color:var(--muted);margin-top:3px;}
+
+/* ── CHART ── */
+.tv-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:10px;}
+.tv-tabs{display:flex;padding:7px;gap:5px;border-bottom:1px solid var(--border);}
+.tv-tab{font-size:10px;padding:4px 9px;border-radius:20px;cursor:pointer;font-weight:600;transition:all .2s;color:var(--dim);}
+.tv-tab.on{background:rgba(0,243,255,.12);color:var(--cyan);}
+
+/* ── EXPIRY COUNTDOWN ── */
+.expiry-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.exp-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;}
+.exp-label{font-size:9px;color:var(--dim);letter-spacing:.8px;text-transform:uppercase;margin-bottom:8px;}
+.exp-type{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;margin-bottom:8px;}
+.exp-dials{display:flex;justify-content:center;gap:10px;}
+.dial{text-align:center;}
+.dial-num{font-family:'Orbitron',monospace;font-size:20px;font-weight:900;color:var(--cyan);line-height:1;}
+.dial-lbl{font-size:8px;color:var(--muted);margin-top:2px;}
+.exp-date{font-size:9px;color:var(--dim);margin-top:8px;}
+
+/* ── BOTTOM NAV ── */
+.bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(7,13,26,.96);border-top:1px solid var(--border);backdrop-filter:blur(16px);z-index:200;display:flex;}
+.bnav-btn{flex:1;padding:8px 2px;text-align:center;cursor:pointer;transition:all .2s;}
+.bnav-btn.on .nv-ico,.bnav-btn.on .nv-lbl{color:var(--cyan);}
+.nv-ico{font-size:17px;display:block;color:var(--dim);}
+.nv-lbl{font-size:8px;color:var(--dim);display:block;margin-top:1px;font-weight:600;letter-spacing:.2px;}
+.spacer{height:60px;}
+
+/* ── REFRESH BTN ── */
+.refresh-btn{background:rgba(0,243,255,.08);border:1px solid rgba(0,243,255,.25);color:var(--cyan);border-radius:6px;padding:4px 10px;font-size:10px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:600;}
+.refresh-btn:active{transform:scale(.96);}
+
+/* ── AI ANALYZE BTN ── */
+.ai-btn{background:linear-gradient(135deg,#f0a500,#d08000);color:#000;border:none;border-radius:7px;padding:6px 12px;font-size:10px;font-weight:800;cursor:pointer;font-family:'Rajdhani',sans-serif;transition:all .2s;}
+.ai-btn:disabled{background:var(--border);color:var(--dim);cursor:not-allowed;}
+.ai-btn:active:not(:disabled){transform:scale(.96);}
+
+/* ── SPINNER ── */
+.spin{display:inline-block;width:10px;height:10px;border:2px solid rgba(0,243,255,.2);border-top-color:var(--cyan);border-radius:50%;animation:spin .7s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ── ALERT TOAST ── */
+#toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:rgba(0,255,135,.15);border:1px solid rgba(0,255,135,.4);color:var(--green);border-radius:8px;padding:8px 14px;font-size:11px;font-weight:700;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;}
+#toast.show{opacity:1;}
+
+/* ── MISC ── */
+.sep{height:1px;background:var(--border);margin:8px 0;}
+.tag{display:inline-block;border-radius:12px;font-size:9px;padding:2px 7px;font-weight:700;letter-spacing:.4px;}
+.chip{background:var(--card2);border:1px solid var(--border);border-radius:6px;padding:5px 8px;}
+
+@media(min-width:540px){
+  .idx-grid{grid-template-columns:repeat(3,1fr);}
+  .ind-grid{grid-template-columns:repeat(4,1fr);}
+  .sector-grid{grid-template-columns:repeat(3,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<div class="hdr">
+  <div class="logo">PAGALPAN<em>⚡</em>TRADING PRO</div>
+  <div class="hdr-right">
+    <span id="clock">--:--:--</span>
+    <span id="mkt" class="mkt-badge open">OPEN</span>
+    <div class="live-dot">LIVE</div>
+  </div>
+</div>
+
+<!-- ═══ TABS ═══ -->
+<div class="tabs-wrap" id="topTabs">
+  <div class="tab on" onclick="go('dash',this)">📊 ડેશ</div>
+  <div class="tab" onclick="go('signal',this)">🎯 સિગ્નલ</div>
+  <div class="tab" onclick="go('options',this)">⚡ Options</div>
+  <div class="tab" onclick="go('news',this)">📰 ન્યૂઝ</div>
+  <div class="tab" onclick="go('fii',this)">💰 FII/DII</div>
+  <div class="tab" onclick="go('sector',this)">🏭 Sector</div>
+  <div class="tab" onclick="go('chart',this)">📈 Chart</div>
+  <div class="tab" onclick="go('alert',this)">🔔 Alert</div>
+</div>
+
+<!-- ████████████ DASHBOARD ████████████ -->
+<div class="panel on" id="panel-dash">
+
+  <!-- INDEX PRICES -->
+  <div class="stitle">📊 Live Indices</div>
+  <div class="idx-grid">
+    <div class="idx-card bull" id="icard-nifty">
+      <div class="idx-name">NIFTY 50</div>
+      <div class="idx-price" id="ip-nifty">24,198</div>
+      <div class="idx-chg bull-txt" id="ic-nifty">+0.59%</div>
+      <div class="idx-range" id="ir-nifty">L:24,020 H:24,250</div>
+    </div>
+    <div class="idx-card bull" id="icard-bn">
+      <div class="idx-name">BANK NIFTY</div>
+      <div class="idx-price" id="ip-bn">52,340</div>
+      <div class="idx-chg bull-txt" id="ic-bn">+0.54%</div>
+      <div class="idx-range" id="ir-bn">L:52,050 H:52,480</div>
+    </div>
+    <div class="idx-card bull" id="icard-sx">
+      <div class="idx-name">SENSEX</div>
+      <div class="idx-price" id="ip-sx">79,840</div>
+      <div class="idx-chg bull-txt" id="ic-sx">+0.48%</div>
+      <div class="idx-range" id="ir-sx">L:79,400 H:79,920</div>
+    </div>
+    <div class="idx-card" id="icard-fn">
+      <div class="idx-name">FIN NIFTY</div>
+      <div class="idx-price" id="ip-fn">23,890</div>
+      <div class="idx-chg bull-txt" id="ic-fn">+0.32%</div>
+      <div class="idx-range">--</div>
+    </div>
+    <div class="idx-card" id="icard-mc">
+      <div class="idx-name">MIDCAP 50</div>
+      <div class="idx-price" id="ip-mc">14,320</div>
+      <div class="idx-chg bull-txt" id="ic-mc">+0.46%</div>
+      <div class="idx-range">--</div>
+    </div>
+    <div class="idx-card" id="icard-vix">
+      <div class="idx-name">INDIA VIX</div>
+      <div class="idx-price" id="ip-vix">14.2</div>
+      <div class="idx-chg neutral-txt" id="ic-vix">-0.8%</div>
+      <div class="idx-range">Low = Calm</div>
+    </div>
+  </div>
+
+  <!-- COMMODITIES -->
+  <div class="stitle">🏅 Commodities & Currency</div>
+  <div class="comm-row">
+    <div class="comm-card">
+      <div class="comm-n">GOLD MCX</div>
+      <div class="comm-p" id="cp-gold">₹72,450</div>
+      <div class="comm-c bull-txt" id="cc-gold">+0.17%</div>
+    </div>
+    <div class="comm-card">
+      <div class="comm-n">CRUDE OIL</div>
+      <div class="comm-p" id="cp-crude">₹6,240</div>
+      <div class="comm-c bull-txt" id="cc-crude">+1.38%</div>
+    </div>
+    <div class="comm-card">
+      <div class="comm-n">USD/INR</div>
+      <div class="comm-p" id="cp-usd">₹83.45</div>
+      <div class="comm-c bear-txt" id="cc-usd">-0.12%</div>
+    </div>
+  </div>
+
+  <!-- QUICK SIGNALS -->
+  <div class="stitle">⚡ Quick Signals</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px;">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px;text-align:center;">
+      <div style="font-size:9px;color:var(--dim);margin-bottom:4px;">NIFTY</div>
+      <div class="final-sig sig-buy" style="font-size:11px;padding:4px 6px;margin:0;" id="qs-n">BUY 🚀</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px;text-align:center;">
+      <div style="font-size:9px;color:var(--dim);margin-bottom:4px;">BANK NIFTY</div>
+      <div class="final-sig sig-buy" style="font-size:11px;padding:4px 6px;margin:0;" id="qs-bn">BUY 🚀</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px;text-align:center;">
+      <div style="font-size:9px;color:var(--dim);margin-bottom:4px;">SENSEX</div>
+      <div class="final-sig sig-wait" style="font-size:11px;padding:4px 6px;margin:0;" id="qs-sx">WAIT 🛑</div>
+    </div>
+  </div>
+
+  <!-- PCR HERO ZERO -->
+  <div class="stitle">🏛️ PCR - Hero Zero Scanner</div>
+  <div class="pcr-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <div>
+        <div style="font-size:9px;color:var(--dim);">NIFTY PCR</div>
+        <div class="pcr-num bull-txt" id="pcr-val">1.18</div>
+        <div style="font-size:10px;" id="pcr-st">🟢 Bullish Zone</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:9px;color:var(--dim);">CE OI</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:13px;color:var(--red);" id="ce-oi">1.2 Cr</div>
+        <div style="font-size:9px;color:var(--dim);margin-top:4px;">PE OI</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:13px;color:var(--green);" id="pe-oi">1.42 Cr</div>
+      </div>
+    </div>
+    <div class="pcr-gauge"><div class="pcr-ptr" id="pcr-ptr" style="left:60%;"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:8px;color:var(--muted);">
+      <span>BEAR(&lt;0.7)</span><span>NEUTRAL(0.8-1.2)</span><span>BULL(&gt;1.3)</span>
+    </div>
+  </div>
+
+  <!-- 7 STRATEGIES -->
+  <div class="stitle">🛡️ 7 Indicators Strategy</div>
+  <div class="strat-grid" id="strat-grid">
+    <!-- filled by JS -->
+  </div>
+
+  <!-- EXPIRY COUNTDOWN -->
+  <div class="stitle">⏳ Expiry Countdown</div>
+  <div class="expiry-grid" id="expiry-grid">
+    <div class="exp-card">
+      <div class="exp-label">WEEKLY EXPIRY</div>
+      <div class="exp-type" style="color:var(--cyan);">NIFTY</div>
+      <div class="exp-dials">
+        <div class="dial"><div class="dial-num" id="wd">00</div><div class="dial-lbl">Days</div></div>
+        <div class="dial"><div class="dial-num" id="wh">00</div><div class="dial-lbl">Hrs</div></div>
+        <div class="dial"><div class="dial-num" id="wm">00</div><div class="dial-lbl">Min</div></div>
+        <div class="dial"><div class="dial-num" id="ws">00</div><div class="dial-lbl">Sec</div></div>
+      </div>
+      <div class="exp-date" id="wdate">--</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-label">MONTHLY EXPIRY</div>
+      <div class="exp-type" style="color:var(--gold);">BANKNIFTY</div>
+      <div class="exp-dials">
+        <div class="dial"><div class="dial-num" id="md">00</div><div class="dial-lbl">Days</div></div>
+        <div class="dial"><div class="dial-num" id="mh">00</div><div class="dial-lbl">Hrs</div></div>
+        <div class="dial"><div class="dial-num" id="mm">00</div><div class="dial-lbl">Min</div></div>
+        <div class="dial"><div class="dial-num" id="ms">00</div><div class="dial-lbl">Sec</div></div>
+      </div>
+      <div class="exp-date" id="mdate">--</div>
+    </div>
+  </div>
+
+  <div style="text-align:center;font-size:9px;color:var(--muted);margin-top:4px;">
+    Last update: <span id="last-upd">--</span> · Auto-refresh 15s
+  </div>
+</div>
+
+<!-- ████████████ SIGNAL PANEL ████████████ -->
+<div class="panel" id="panel-signal">
+  <div class="stitle">🎯 Full Indicator Signals</div>
+
+  <!-- NIFTY SIGNAL -->
+  <div class="sig-card">
+    <div class="sig-hdr">
+      <div class="sig-idx">📊 NIFTY 50</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;" id="sp-n">24,198</div>
+    </div>
+    <div class="final-sig sig-buy" id="sf-n">🚀 BUY CALL</div>
+    <div class="vote-wrap">
+      <div class="vote-lbl">
+        <span style="color:var(--green);">Bullish: <span id="vb-n">5</span></span>
+        <span style="color:var(--red);">Bearish: <span id="vr-n">2</span></span>
+      </div>
+      <div class="vote-bar"><div class="vote-b" id="vbar-n" style="width:71%;"></div><div class="vote-r"></div></div>
+    </div>
+    <div class="ind-grid">
+      <div class="ind-box"><div class="ind-lbl"><span class="ind-dot" style="background:#0095ff;"></span>Bollinger</div><div class="ind-val" id="n-bb">Mid Band</div><div class="ind-st neutral-txt">Squeeze ⚠️</div></div>
+      <div class="ind-box"><div class="ind-lbl"><span class="ind-dot" style="background:var(--green);"></span>MACD</div><div class="ind-val" id="n-macd">+12.4</div><div class="ind-st bull-txt">Bull Cross 📈</div></div>
+      <div class="ind-box"><div class="ind-lbl"><span class="ind-dot" style="background:var(--red);"></span>RSI(14)</div><div class="ind-val" id="n-rsi">62.4</div><div class="ind-st bull-txt">Strong Zone</div></div>
+      <div class="ind-box"><div class="ind-lbl"><span class="ind-dot" style="background:var(--purple);"></span>EMA 200</div><div class="ind-val" id="n-200">23,540</div><div class="ind-st bull-txt">Above ✅</div></div>
+      <div class="ind-box"><div class="ind-lbl"><span class="ind-dot" style="background:var(--orange);"></span>EMA 50</div><div class="ind-val" id="n-50">24,020</div><div class="ind-st bull-txt">Above ✅</div></div>
+      <div class="ind-box"><div class="ind-lbl"><span class="ind-dot" style="background:var(--cyan);"></span>EMA 9</div><div class="ind-val" id="n-9">24,150</div><div class="ind-st bull-txt">Short Uptrend 🔥</div></div>
+      <div class="ind-box"><div class="ind-lbl"><span class="ind-dot" style="background:var(--green);"></span>EMA 21</div><div class="ind-val" id="n-21">24,090</div><div class="ind-st bull-txt">Entry Zone ✅</div></div>
+      <div class="ind-box"><div class="ind-lbl"><span class="ind-dot" style="background:var(--gold);"></span>VWAP</div><div class="ind-val" id="n-vwap">24,120</div><div class="ind-st bull-txt">Above VWAP</div></div>
+    </div>
+    <div class="stitle" style="margin-top:6px;">🎯 Key Levels</div>
+    <div class="lvls-grid">
+      <div class="lvl-box"><div class="lvl-lbl">R2</div><div class="lvl-val r-col" id="n-r2">24,380</div></div>
+      <div class="lvl-box"><div class="lvl-lbl">R1</div><div class="lvl-val r-col" id="n-r1">24,290</div></div>
+      <div class="lvl-box"><div class="lvl-lbl">PIVOT</div><div class="lvl-val p-col" id="n-piv">24,135</div></div>
+      <div class="lvl-box"><div class="lvl-lbl">S1</div><div class="lvl-val s-col" id="n-s1">24,050</div></div>
+      <div class="lvl-box"><div class="lvl-lbl">S2</div><div class="lvl-val s-col" id="n-s2">23,960</div></div>
+      <div class="lvl-box"><div class="lvl-lbl">ATR SL</div><div class="lvl-val s-col" id="n-sl">24,010</div></div>
+    </div>
+    <div style="background:var(--card2);border-radius:7px;padding:8px;margin-top:8px;font-size:10px;line-height:1.6;">
+      <span style="color:var(--gold);font-weight:700;">📦 Entry Config: </span>
+      <span style="color:var(--dim);">Capital ₹25,000 | Risk 1% (₹250) | RR 1:3 | ATR × 1.5 SL</span>
+    </div>
+  </div>
+
+  <!-- BANK NIFTY SIGNAL -->
+  <div class="sig-card">
+    <div class="sig-hdr">
+      <div class="sig-idx">🏦 BANK NIFTY</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;" id="sp-bn">52,340</div>
+    </div>
+    <div class="final-sig sig-buy" id="sf-bn">🚀 BUY CALL</div>
+    <div class="vote-wrap">
+      <div class="vote-lbl">
+        <span style="color:var(--green);">Bullish: <span id="vb-bn">6</span></span>
+        <span style="color:var(--red);">Bearish: <span id="vr-bn">1</span></span>
+      </div>
+      <div class="vote-bar"><div class="vote-b" id="vbar-bn" style="width:86%;"></div><div class="vote-r"></div></div>
+    </div>
+    <div class="ind-grid">
+      <div class="ind-box"><div class="ind-lbl"><span class="ind-dot" style="background:var(--red);"></span>RSI(14)</div><div class="ind-val" id="bn-rsi">68.2</div><div class="ind-st bull-txt">Strong</div></div>
+      <div class="ind-box"><div class="ind-lbl"><span class="ind-dot" style="background:var(--green);"></span>MACD</div><div class="ind-val" id="bn-macd">+48.6</div><div class="ind-st bull-txt">Bullish 📈</div></div>
+      <div class="ind-box"><div class="ind-lbl"><span class="ind-dot" style="background:var(--cyan);"></span>EMA 9</div><div class="ind-val" id="bn-9">52,280</div><div class="ind-st bull-txt">Above 🔥</div></div>
+      <div class="ind-box"><div class="ind-lbl"><span class="ind-dot" style="background:var(--green);"></span>EMA 21</div><div class="ind-val" id="bn-21">52,150</div><div class="ind-st bull-txt">Entry ✅</div></div>
+    </div>
+    <div class="lvls-grid" style="margin-top:6px;">
+      <div class="lvl-box"><div class="lvl-lbl">R2</div><div class="lvl-val r-col">52,700</div></div>
+      <div class="lvl-box"><div class="lvl-lbl">R1</div><div class="lvl-val r-col">52,520</div></div>
+      <div class="lvl-box"><div class="lvl-lbl">PIVOT</div><div class="lvl-val p-col">52,230</div></div>
+      <div class="lvl-box"><div class="lvl-lbl">S1</div><div class="lvl-val s-col">52,120</div></div>
+      <div class="lvl-box"><div class="lvl-lbl">S2</div><div class="lvl-val s-col">51,900</div></div>
+      <div class="lvl-box"><div class="lvl-lbl">ATR SL</div><div class="lvl-val s-col">52,080</div></div>
+    </div>
+  </div>
+
+  <!-- SENSEX SIGNAL -->
+  <div class="sig-card">
+    <div class="sig-hdr">
+      <div class="sig-idx">📉 SENSEX</div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:15px;color:#fff;">79,840</div>
+    </div>
+    <div class="final-sig sig-wait" id="sf-sx">🛑 WAIT / NO TRADE</div>
+    <div class="ind-grid">
+      <div class="ind-box"><div class="ind-lbl"><span class="ind-dot" style="background:var(--red);"></span>RSI(14)</div><div class="ind-val">51.8</div><div class="ind-st neutral-txt">Neutral ⏳</div></div>
+      <div class="ind-box"><div class="ind-lbl"><span class="ind-dot" style="background:var(--green);"></span>MACD</div><div class="ind-val">+8.2</div><div class="ind-st neutral-txt">Weak 📊</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ████████████ OPTIONS PANEL ████████████ -->
+<div class="panel" id="panel-options">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+    <div class="stitle" style="margin:0;">⚡ Option Chain</div>
+    <select id="oc-sym" style="background:var(--card2);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:4px 8px;font-size:10px;" onchange="buildOptionChain()">
+      <option>NIFTY</option><option>BANKNIFTY</option><option>FINNIFTY</option>
+    </select>
+  </div>
+
+  <!-- ATM CE vs PE Fight -->
+  <div class="card" style="padding:11px;margin-bottom:10px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <div style="text-align:center;">
+        <div style="font-size:9px;color:var(--dim);">ATM CE (Call)</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:20px;color:var(--red);" id="ce-ltp">₹185</div>
+        <div style="font-size:8px;color:var(--dim);" id="ce-strike">24200 CE</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:14px;font-weight:700;color:var(--gold);" id="fight-result">CE Strong ⚡</div>
+        <div style="font-size:9px;color:var(--dim);">CE vs PE Fight</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:9px;color:var(--dim);">ATM PE (Put)</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:20px;color:var(--green);" id="pe-ltp">₹142</div>
+        <div style="font-size:8px;color:var(--dim);" id="pe-strike">24200 PE</div>
+      </div>
+    </div>
+    <div style="height:7px;background:var(--card2);border-radius:8px;overflow:hidden;">
+      <div style="height:100%;width:57%;background:linear-gradient(90deg,var(--red),#ff6b6b);border-radius:8px;" id="fight-bar"></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:8px;color:var(--muted);margin-top:3px;" id="fight-pct">
+      <span>CE 57%</span><span>PE 43%</span>
+    </div>
+  </div>
+
+  <!-- OI Chart bars -->
+  <div class="stitle">📊 OI Analysis</div>
+  <div id="oi-bars" style="margin-bottom:10px;"></div>
+
+  <!-- Full option table -->
+  <div class="stitle">📋 Strike-wise Chain</div>
+  <div style="overflow-x:auto;">
+    <table class="opt-table">
+      <thead>
+        <tr>
+          <th style="text-align:center;color:var(--red);">CE OI</th>
+          <th style="text-align:center;color:var(--red);">CE LTP</th>
+          <th style="color:var(--gold);text-align:center;">STRIKE</th>
+          <th style="text-align:center;color:var(--green);">PE LTP</th>
+          <th style="text-align:center;color:var(--green);">PE OI</th>
+        </tr>
+      </thead>
+      <tbody id="oc-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ████████████ NEWS PANEL ████████████ -->
+<div class="panel" id="panel-news">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+    <div class="stitle" style="margin:0;">📰 AI News Sentiment</div>
+    <button class="ai-btn" id="analyze-all-btn" onclick="analyzeAllNews()">⚡ Analyze All</button>
+  </div>
+
+  <!-- Impact Summary -->
+  <div class="card" style="padding:11px;margin-bottom:10px;">
+    <div style="font-size:9px;color:var(--gold);font-weight:700;letter-spacing:.8px;margin-bottom:8px;">ન્યૂઝ IMPACT % (Index-wise)</div>
+    <div id="impact-bars"></div>
+  </div>
+
+  <div id="news-container"></div>
+</div>
+
+<!-- ████████████ FII/DII PANEL ████████████ -->
+<div class="panel" id="panel-fii">
+  <div class="stitle">💰 FII / DII Cash Market</div>
+  <div class="fii-grid">
+    <div class="fii-card">
+      <div class="fii-title">🌏 FII (Foreign)</div>
+      <div class="fii-amt" id="fii-net" style="color:var(--green);">+₹2,840 Cr</div>
+      <div class="fii-row">
+        <div><div style="color:var(--dim);font-size:8px;">BUY</div><div style="color:var(--green);font-family:'Share Tech Mono',monospace;font-size:12px;" id="fii-buy">₹12,450 Cr</div></div>
+        <div style="text-align:right;"><div style="color:var(--dim);font-size:8px;">SELL</div><div style="color:var(--red);font-family:'Share Tech Mono',monospace;font-size:12px;" id="fii-sell">₹9,610 Cr</div></div>
+      </div>
+    </div>
+    <div class="fii-card">
+      <div class="fii-title">🇮🇳 DII (Domestic)</div>
+      <div class="fii-amt" id="dii-net" style="color:var(--green);">+₹1,520 Cr</div>
+      <div class="fii-row">
+        <div><div style="color:var(--dim);font-size:8px;">BUY</div><div style="color:var(--green);font-family:'Share Tech Mono',monospace;font-size:12px;" id="dii-buy">₹8,940 Cr</div></div>
+        <div style="text-align:right;"><div style="color:var(--dim);font-size:8px;">SELL</div><div style="color:var(--red);font-family:'Share Tech Mono',monospace;font-size:12px;" id="dii-sell">₹7,420 Cr</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5-day trend -->
+  <div class="stitle">📅 5-Day FII Trend</div>
+  <div class="card" style="overflow-x:auto;margin-bottom:10px;">
+    <table style="width:100%;border-collapse:collapse;font-size:10px;min-width:260px;">
+      <tr style="color:var(--dim);"><th style="padding:5px 7px;text-align:left;border-bottom:1px solid var(--border);">Date</th><th style="padding:5px 7px;text-align:right;border-bottom:1px solid var(--border);">FII</th><th style="padding:5px 7px;text-align:right;border-bottom:1px solid var(--border);">DII</th><th style="padding:5px 7px;text-align:right;border-bottom:1px solid var(--border);">NIFTY</th></tr>
+      <tr><td style="padding:5px 7px;">Apr 04</td><td style="padding:5px 7px;text-align:right;color:var(--green);">+2840</td><td style="padding:5px 7px;text-align:right;color:var(--green);">+1520</td><td style="padding:5px 7px;text-align:right;color:var(--green);">+0.59%</td></tr>
+      <tr><td style="padding:5px 7px;">Apr 03</td><td style="padding:5px 7px;text-align:right;color:var(--red);">-1240</td><td style="padding:5px 7px;text-align:right;color:var(--green);">+2180</td><td style="padding:5px 7px;text-align:right;color:var(--red);">-0.32%</td></tr>
+      <tr><td style="padding:5px 7px;">Apr 02</td><td style="padding:5px 7px;text-align:right;color:var(--green);">+3650</td><td style="padding:5px 7px;text-align:right;color:var(--red);">-890</td><td style="padding:5px 7px;text-align:right;color:var(--green);">+0.71%</td></tr>
+      <tr><td style="padding:5px 7px;">Apr 01</td><td style="padding:5px 7px;text-align:right;color:var(--green);">+1820</td><td style="padding:5px 7px;text-align:right;color:var(--green);">+1340</td><td style="padding:5px 7px;text-align:right;color:var(--green);">+0.44%</td></tr>
+      <tr><td style="padding:5px 7px;">Mar 31</td><td style="padding:5px 7px;text-align:right;color:var(--red);">-2100</td><td style="padding:5px 7px;text-align:right;color:var(--green);">+3200</td><td style="padding:5px 7px;text-align:right;color:var(--red);">-0.18%</td></tr>
+    </table>
+  </div>
+
+  <!-- Pro Trader -->
+  <div class="stitle">🎯 Pro Trader Positions</div>
+  <div class="card" style="overflow-x:auto;margin-bottom:10px;">
+    <table class="pro-table">
+      <thead><tr style="background:var(--card2);"><th>Trader</th><th>Index</th><th>Position</th><th>Contracts</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--cyan);">Prop Desk</td><td>NIFTY</td><td><span class="badge b-long">LONG</span></td><td style="color:var(--green);">+12,450</td></tr>
+        <tr><td style="color:var(--purple);">HNI</td><td>BANKNIFTY</td><td><span class="badge b-long">LONG</span></td><td style="color:var(--green);">+8,200</td></tr>
+        <tr><td style="color:var(--gold);">Retail</td><td>NIFTY</td><td><span class="badge b-short">SHORT</span></td><td style="color:var(--red);">-24,800</td></tr>
+        <tr><td style="color:var(--cyan);">Prop Desk</td><td>SENSEX</td><td><span class="badge b-flat">FLAT</span></td><td style="color:var(--gold);">0</td></tr>
+        <tr><td style="color:var(--purple);">HNI</td><td>FINNIFTY</td><td><span class="badge b-short">SHORT</span></td><td style="color:var(--red);">-5,600</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AI FII Analysis -->
+  <div class="stitle">🤖 AI FII Analysis</div>
+  <button class="ai-btn" onclick="getAIFIIAnalysis()" style="width:100%;margin-bottom:8px;">AI FII/DII Sentiment Analysis</button>
+  <div id="fii-ai-box" style="display:none;background:rgba(0,243,255,.04);border:1px solid rgba(0,243,255,.2);border-radius:9px;padding:11px;font-size:11px;line-height:1.7;white-space:pre-wrap;color:var(--text);"></div>
+</div>
+
+<!-- ████████████ SECTOR PANEL ████████████ -->
+<div class="panel" id="panel-sector">
+  <div class="stitle">🏭 Sector Heatmap</div>
+  <div class="sector-grid" id="sector-grid"></div>
+
+  <!-- Top Gainers / Losers -->
+  <div class="stitle">📈 Top Gainers</div>
+  <div id="gainers-list"></div>
+  <div class="stitle">📉 Top Losers</div>
+  <div id="losers-list"></div>
+
+  <!-- PCR History -->
+  <div class="stitle">📊 PCR History (7 Days)</div>
+  <div id="pcr-history" style="display:flex;gap:5px;overflow-x:auto;padding-bottom:4px;"></div>
+</div>
+
+<!-- ████████████ CHART PANEL ████████████ -->
+<div class="panel" id="panel-chart">
+  <div class="stitle">📈 TradingView Live Charts</div>
+  <div class="tv-wrap">
+    <div class="tv-tabs">
+      <div class="tv-tab on" onclick="switchChart('NSE:NIFTY',this)">NIFTY</div>
+      <div class="tv-tab" onclick="switchChart('NSE:BANKNIFTY',this)">BANKNIFTY</div>
+      <div class="tv-tab" onclick="switchChart('BSE:SENSEX',this)">SENSEX</div>
+      <div class="tv-tab" onclick="switchChart('NSE:FINNIFTY',this)">FINNIFTY</div>
+      <div class="tv-tab" onclick="switchChart('MCX:GOLD1!',this)">GOLD</div>
+    </div>
+    <div id="tv-main" style="height:320px;"></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;height:160px;">
+      <iframe src="" width="100%" height="160" frameborder="0" scrolling="no"></iframe>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;height:160px;">
+      <iframe src="" width="100%" height="160" frameborder="0" scrolling="no"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ████████████ ALERTS PANEL ████████████ -->
+<div class="panel" id="panel-alert">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+    <div class="stitle" style="margin:0;">🔔 Live Alerts</div>
+    <button class="ai-btn" onclick="getAIAlerts()">🤖 AI Signal</button>
+  </div>
+  <div id="alerts-container">
+    <div class="hz-alert hz-buy"><div class="hz-title" style="color:var(--green);">🚀 BUY SIGNAL: NIFTY 50</div><div class="hz-body">RSI 62.4, EMA9 ઉપર, MACD Bull Cross. Entry: 24,198 | Target: 24,290 | SL: 24,090 (ATR×1.5)</div><div class="hz-time">10:32 AM IST</div></div>
+    <div class="hz-alert hz-buy"><div class="hz-title" style="color:var(--green);">🏦 BUY SIGNAL: BANK NIFTY</div><div class="hz-body">RSI 68, CE Strong, Vol surge 2.1x. Entry: 52,340 | Target: 52,520 | SL: 52,150</div><div class="hz-time">10:28 AM IST</div></div>
+    <div class="hz-alert hz-info"><div class="hz-title" style="color:var(--cyan);">📊 FII Buying Alert</div><div class="hz-body">FII ₹2,840 Cr net buyer. DII +₹1,520 Cr. Combined Bullish. Nifty support 24,050 strong.</div><div class="hz-time">09:45 AM IST</div></div>
+    <div class="hz-alert hz-info"><div class="hz-title" style="color:var(--cyan);">💥 Hero-Zero PCR Scanner</div><div class="hz-body">PCR: 1.18 – Bullish zone. OTM Call options 10-15 Rs may give 2-3x. HIGH RISK – Capital can be ZERO.</div><div class="hz-time">09:30 AM IST</div></div>
+  </div>
+  <div id="ai-alert-box" style="display:none;margin-top:10px;background:rgba(0,243,255,.04);border:1px solid rgba(0,243,255,.2);border-radius:9px;padding:11px;font-size:11px;line-height:1.7;white-space:pre-wrap;color:var(--text);"></div>
+</div>
+
+<div class="spacer"></div>
+
+<!-- ═══ BOTTOM NAV ═══ -->
+<div class="bnav">
+  <div class="bnav-btn on" onclick="go('dash',null,this)"><span class="nv-ico">📊</span><span class="nv-lbl">ડેશ</span></div>
+  <div class="bnav-btn" onclick="go('signal',null,this)"><span class="nv-ico">🎯</span><span class="nv-lbl">Signal</span></div>
+  <div class="bnav-btn" onclick="go('options',null,this)"><span class="nv-ico">⚡</span><span class="nv-lbl">Options</span></div>
+  <div class="bnav-btn" onclick="go('news',null,this)"><span class="nv-ico">📰</span><span class="nv-lbl">ન્યૂઝ</span></div>
+  <div class="bnav-btn" onclick="go('fii',null,this)"><span class="nv-ico">💰</span><span class="nv-lbl">FII</span></div>
+  <div class="bnav-btn" onclick="go('sector',null,this)"><span class="nv-ico">🏭</span><span class="nv-lbl">Sector</span></div>
+  <div class="bnav-btn" onclick="go('chart',null,this)"><span class="nv-ico">📈</span><span class="nv-lbl">Chart</span></div>
+  <div class="bnav-btn" onclick="go('alert',null,this)"><span class="nv-ico">🔔</span><span class="nv-lbl">Alert</span></div>
+</div>
+
+<div id="toast">✅ Copied!</div>
+
+<script>
+// ═══════════════════════════════════════════
+//  PAGALPAN TRADING PRO — CORE JS
+// ═══════════════════════════════════════════
+
+const PANELS = ['dash','signal','options','news','fii','sector','chart','alert'];
+
+// ── Panel Switching ─────────────────────────────────────────────
+function go(id, tabEl, navEl) {
+  PANELS.forEach(p => {
+    document.getElementById('panel-'+p).classList.remove('on');
+  });
+  document.getElementById('panel-'+id).classList.add('on');
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+  document.querySelectorAll('.bnav-btn').forEach(b => b.classList.remove('on'));
+  const tabs = document.querySelectorAll('.tab');
+  const navs = document.querySelectorAll('.bnav-btn');
+  const idx = PANELS.indexOf(id);
+  if(tabs[idx]) tabs[idx].classList.add('on');
+  if(navs[idx]) navs[idx].classList.add('on');
+  if(id === 'chart') initTV('NSE:NIFTY');
+  if(id === 'options') buildOptionChain();
+  if(id === 'sector') buildSectors();
+  if(id === 'news') buildNews();
+}
+
+// ── Clock & Market ──────────────────────────────────────────────
+function tick() {
+  const now = new Date();
+  const ist = new Date(now.toLocaleString('en-US',{timeZone:'Asia/Kolkata'}));
+  const pad = n => String(n).padStart(2,'0');
+  document.getElementById('clock').textContent =
+    `${pad(ist.getHours())}:${pad(ist.getMinutes())}:${pad(ist.getSeconds())}`;
+  const d = ist.getDay(), h = ist.getHours()*60+ist.getMinutes();
+  const open = d>=1&&d<=5&&h>=555&&h<=930;
+  const el = document.getElementById('mkt');
+  el.textContent = open ? 'MARKET OPEN' : 'MARKET CLOSED';
+  el.className = 'mkt-badge ' + (open ? 'open' : 'closed');
+  updateExpiry(ist);
+}
+setInterval(tick, 1000);
+tick();
+
+// ── Expiry Countdown ────────────────────────────────────────────
+function nextThursday(base) {
+  const d = new Date(base);
+  const day = d.getDay();
+  const diff = (4 - day + 7) % 7 || 7;
+  d.setDate(d.getDate() + diff);
+  d.setHours(15,30,0,0);
+  return d;
+}
+function lastThursdayOfMonth(base) {
+  const d = new Date(base.getFullYear(), base.getMonth()+1, 0);
+  while(d.getDay() !== 4) d.setDate(d.getDate()-1);
+  if(d <= base) {
+    const nm = new Date(base.getFullYear(), base.getMonth()+2, 0);
+    while(nm.getDay() !== 4) nm.setDate(nm.getDate()-1);
+    return nm;
+  }
+  return d;
+}
+function fmtDate(d) {
+  return d.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric',timeZone:'Asia/Kolkata'});
+}
+function updateExpiry(now) {
+  const weekly = nextThursday(now);
+  const monthly = lastThursdayOfMonth(now);
+  [['w',weekly],['m',monthly]].forEach(([pfx,target]) => {
+    const diff = target - now;
+    if(diff < 0) return;
+    const days = Math.floor(diff/86400000);
+    const hrs  = Math.floor((diff%86400000)/3600000);
+    const mins = Math.floor((diff%3600000)/60000);
+    const secs = Math.floor((diff%60000)/1000);
+    document.getElementById(pfx+'d').textContent = String(days).padStart(2,'0');
+    document.getElementById(pfx+'h').textContent = String(hrs).padStart(2,'0');
+    document.getElementById(pfx+'m').textContent = String(mins).padStart(2,'0');
+    document.getElementById(pfx+'s').textContent = String(secs).padStart(2,'0');
+    document.getElementById(pfx+'date').textContent = fmtDate(target);
+  });
+}
+
+// ── Market Data (simulated with realistic fluctuation) ──────────
+const BASE = {
+  nifty:24198, bn:52340, sx:79840, fn:23890, mc:14320, vix:14.2,
+  gold:72450, crude:6240, usd:83.45
+};
+function rnd(base, pct=0.002) { return +(base + (Math.random()-.5)*base*pct).toFixed(2); }
+function fmt(n) {
+  if(n>=10000) return n.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+  return n.toFixed(2);
+}
+
+function refreshMarket() {
+  const nifty = rnd(BASE.nifty); const bn = rnd(BASE.bn); const sx = rnd(BASE.sx);
+  const fn = rnd(BASE.fn); const mc = rnd(BASE.mc); const vix = rnd(BASE.vix,.003);
+  const prevN=24056, prevBN=52060, prevSX=79460;
+
+  setIdx('nifty', fmt(nifty), ((nifty-prevN)/prevN*100).toFixed(2), nifty>prevN, 24020, 24250);
+  setIdx('bn', fmt(bn), ((bn-prevBN)/prevBN*100).toFixed(2), bn>prevBN, 52050, 52480);
+  setIdx('sx', fmt(sx), ((sx-prevSX)/prevSX*100).toFixed(2), sx>prevSX, 79400, 79920);
+  setIdx('fn', fmt(fn), (.32).toFixed(2), true, 0, 0, false);
+  setIdx('mc', fmt(mc), (.46).toFixed(2), true, 0, 0, false);
+  setIdx('vix', fmt(vix), (-.8).toFixed(2), false, 0, 0, false);
+
+  const gold=rnd(BASE.gold,.001); const crude=rnd(BASE.crude,.005); const usd=rnd(BASE.usd,.001);
+  document.getElementById('cp-gold').textContent='₹'+fmt(gold);
+  document.getElementById('cp-crude').textContent='₹'+fmt(crude);
+  document.getElementById('cp-usd').textContent='₹'+fmt(usd);
+  document.getElementById('cc-gold').textContent='+0.17%';
+  document.getElementById('cc-crude').textContent='+1.38%';
+  document.getElementById('cc-usd').textContent='-0.12%';
+  document.getElementById('cc-gold').className='comm-c bull-txt';
+  document.getElementById('cc-crude').className='comm-c bull-txt';
+  document.getElementById('cc-usd').className='comm-c bear-txt';
+
+  // RSI calculation (simulated live)
+  const rsiN = +(55+Math.random()*15).toFixed(1);
+  const rsiBN = +(60+Math.random()*12).toFixed(1);
+  document.getElementById('n-rsi').textContent = rsiN;
+  document.getElementById('bn-rsi').textContent = rsiBN;
+  document.getElementById('n-macd').textContent = '+'+(10+Math.random()*8).toFixed(1);
+  document.getElementById('n-9').textContent = fmt(nifty*.9993);
+  document.getElementById('n-21').textContent = fmt(nifty*.9967);
+  document.getElementById('n-50').textContent = fmt(nifty*.9926);
+  document.getElementById('n-200').textContent = fmt(nifty*.9727);
+  document.getElementById('n-vwap').textContent = fmt(nifty*.9985);
+  document.getElementById('sp-n').textContent = fmt(nifty);
+  document.getElementById('sp-bn').textContent = fmt(bn);
+
+  // PCR
+  const pcr = +(1.05+Math.random()*.3).toFixed(2);
+  document.getElementById('pcr-val').textContent = pcr;
+  const pctL = Math.min(88,Math.max(10,(pcr/2)*100))+'%';
+  document.getElementById('pcr-ptr').style.left = pctL;
+  const pEl = document.getElementById('pcr-st');
+  if(pcr<.7){pEl.textContent='🔴 Bearish Zone';pEl.style.color='var(--red)';}
+  else if(pcr>1.3){pEl.textContent='🟢 Bullish Zone';pEl.style.color='var(--green)';}
+  else{pEl.textContent='🟡 Neutral Zone';pEl.style.color='var(--gold)';}
+
+  document.getElementById('last-upd').textContent =
+    new Date().toLocaleTimeString('en-IN',{timeZone:'Asia/Kolkata'});
+}
+
+function setIdx(id, price, pct, bull, low, high, showRange=true) {
+  document.getElementById('ip-'+id).textContent = price;
+  document.getElementById('ic-'+id).textContent = (bull?'+':'')+pct+'%';
+  document.getElementById('ic-'+id).className = 'idx-chg '+(bull?'bull-txt':'bear-txt');
+  document.getElementById('icard-'+id).className = 'idx-card '+(bull?'bull':'bear');
+  if(showRange&&low&&high) document.getElementById('ir-'+id).textContent =
+    'L:'+low.toLocaleString()+' H:'+high.toLocaleString();
+}
+
+// ── Strategy Legend ─────────────────────────────────────────────
+const STRATS = [
+  {n:1,name:'Bollinger Band',role:'Volatility Level',col:'#0095ff'},
+  {n:2,name:'MACD',role:'Buy / Sell Signal',col:'var(--green)'},
+  {n:3,name:'RSI (14)',role:'Overbought & Oversold',col:'var(--red)'},
+  {n:4,name:'200 EMA',role:'Long Term Trend',col:'var(--purple)'},
+  {n:5,name:'50 EMA',role:'Stop Loss Point',col:'var(--orange)'},
+  {n:6,name:'9 EMA',role:'Short Term Trend',col:'var(--cyan)'},
+  {n:7,name:'21 EMA',role:'Entry / Exit Point',col:'var(--green)'},
+];
+document.getElementById('strat-grid').innerHTML = STRATS.map(s=>`
+  <div class="strat-item">
+    <div class="strat-num" style="background:${s.col}22;color:${s.col};">${s.n}</div>
+    <div><div class="strat-n">${s.name}</div><div class="strat-r" style="color:${s.col};">${s.role}</div></div>
+  </div>`).join('');
+
+// ── Sectors ─────────────────────────────────────────────────────
+const SECTORS=[
+  {n:'Banking',g:'બેન્કિંગ',col:'var(--blue)'},
+  {n:'IT',g:'IT ટૅક',col:'var(--purple)'},
+  {n:'Auto',g:'ઓટો',col:'var(--orange)'},
+  {n:'Pharma',g:'ફાર્મા',col:'#06b6d4'},
+  {n:'FMCG',g:'FMCG',col:'#84cc16'},
+  {n:'Metal',g:'ધાતુ',col:'#94a3b8'},
+  {n:'Realty',g:'રિયલ્ટી',col:'#f472b6'},
+  {n:'Energy',g:'એનર્જી',col:'var(--gold)'},
+];
+function buildSectors() {
+  const data = SECTORS.map(s=>({...s,chg:+(-2+Math.random()*4.5).toFixed(2)}));
+  document.getElementById('sector-grid').innerHTML = data.map(s=>`
+    <div class="sec-card">
+      <div><div class="sec-name" style="color:${s.col};">${s.n}</div>
+      <div style="font-size:9px;color:var(--dim);">${s.g}</div>
+      <div class="sec-bar-wrap"><div class="sec-bar" style="width:${50+s.chg*10}%;background:${s.chg>=0?'var(--green)':'var(--red)'};"></div></div>
+      </div>
+      <div class="sec-chg" style="color:${s.chg>=0?'var(--green)':'var(--red)'};">${s.chg>=0?'+':''}${s.chg}%</div>
+    </div>`).join('');
+
+  const stocks=['RELIANCE','TCS','HDFC BK','INFY','ICICI BK','BAJFIN','WIPRO','SBIN','L&T','HCLT'];
+  const all = stocks.map(n=>({n,chg:+(-5+Math.random()*10).toFixed(2),price:+(800+Math.random()*3000).toFixed(0)})).sort((a,b)=>b.chg-a.chg);
+  document.getElementById('gainers-list').innerHTML = all.slice(0,4).map(s=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--card);border:1px solid var(--border);border-radius:7px;margin-bottom:5px;">
+      <div><div style="font-size:11px;font-weight:700;color:#fff;">${s.n}</div><div style="font-size:9px;color:var(--dim);">₹${s.price}</div></div>
+      <div style="color:var(--green);font-family:'Share Tech Mono',monospace;font-size:13px;font-weight:700;">+${s.chg}%</div>
+    </div>`).join('');
+  document.getElementById('losers-list').innerHTML = all.slice(-4).reverse().map(s=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--card);border:1px solid var(--border);border-radius:7px;margin-bottom:5px;">
+      <div><div style="font-size:11px;font-weight:700;color:#fff;">${s.n}</div><div style="font-size:9px;color:var(--dim);">₹${s.price}</div></div>
+      <div style="color:var(--red);font-family:'Share Tech Mono',monospace;font-size:13px;font-weight:700;">${s.chg}%</div>
+    </div>`).join('');
+
+  // PCR history chart
+  const pcrDays=['Mon','Tue','Wed','Thu','Fri','Mon','Tue'].map(d=>({d,pcr:+(0.7+Math.random()*.8).toFixed(2)}));
+  document.getElementById('pcr-history').innerHTML = pcrDays.map(p=>`
+    <div style="text-align:center;flex-shrink:0;">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:11px;font-weight:700;color:${p.pcr>1?'var(--green)':p.pcr<.8?'var(--red)':'var(--gold)'};">${p.pcr}</div>
+      <div style="width:30px;height:${p.pcr*40}px;background:${p.pcr>1?'var(--green)':p.pcr<.8?'var(--red)':'var(--gold)'};border-radius:3px 3px 0 0;opacity:.7;margin:3px auto 0;"></div>
+      <div style="font-size:8px;color:var(--muted);margin-top:2px;">${p.d}</div>
+    </div>`).join('');
+}
+
+// ── Option Chain ─────────────────────────────────────────────────
+function buildOptionChain() {
+  const sym = document.getElementById('oc-sym').value;
+  const spot = sym==='NIFTY'?24200:sym==='BANKNIFTY'?52400:23900;
+  const step = sym==='NIFTY'?50:sym==='BANKNIFTY'?100:50;
+  const base = Math.round(spot/step)*step;
+  const rows = Array.from({length:13},(_,i)=>{
+    const strike=base+(i-6)*step, diff=strike-spot;
+    const cOI=Math.round(Math.max(500,9000-Math.abs(diff)*(sym==='BANKNIFTY'?.05:.16)+Math.random()*2000));
+    const pOI=Math.round(Math.max(500,9000-Math.abs(diff)*(sym==='BANKNIFTY'?.05:.16)+Math.random()*2000));
+    const cLTP=+Math.max(.5,(diff<0?-diff*.8:20)+Math.random()*30).toFixed(1);
+    const pLTP=+Math.max(.5,(diff>0?diff*.8:20)+Math.random()*30).toFixed(1);
+    return{strike,cOI,pOI,cLTP,pLTP,atm:Math.abs(diff)<=step*.6};
+  });
+
+  // ATM entry
+  const atm = rows.find(r=>r.atm)||rows[6];
+  document.getElementById('ce-ltp').textContent='₹'+atm.cLTP;
+  document.getElementById('pe-ltp').textContent='₹'+atm.pLTP;
+  document.getElementById('ce-strike').textContent=atm.strike+' CE';
+  document.getElementById('pe-strike').textContent=atm.strike+' PE';
+  const cePct=Math.round(atm.cLTP/(atm.cLTP+atm.pLTP)*100);
+  document.getElementById('fight-bar').style.width=cePct+'%';
+  document.getElementById('fight-pct').innerHTML=`<span>CE ${cePct}%</span><span>PE ${100-cePct}%</span>`;
+  document.getElementById('fight-result').textContent=cePct>50?'CE Strong ⚡':'PE Strong ⚡';
+
+  // OI bars
+  const maxOI=Math.max(...rows.map(r=>Math.max(r.cOI,r.pOI)));
+  document.getElementById('oi-bars').innerHTML=rows.map(r=>`
+    <div style="display:flex;align-items:center;gap:5px;margin-bottom:4px;font-size:9px;">
+      <div style="width:42px;text-align:right;color:var(--dim);">${(r.cOI/1000).toFixed(0)}k</div>
+      <div style="flex:1;height:6px;background:var(--card2);border-radius:3px;overflow:hidden;display:flex;flex-direction:row-reverse;">
+        <div style="height:100%;width:${(r.cOI/maxOI*100).toFixed(0)}%;background:var(--red);border-radius:3px;"></div>
+      </div>
+      <div style="width:38px;text-align:center;font-weight:700;color:${r.atm?'var(--gold)':'var(--dim)'};">${r.strike}</div>
+      <div style="flex:1;height:6px;background:var(--card2);border-radius:3px;overflow:hidden;">
+        <div style="height:100%;width:${(r.pOI/maxOI*100).toFixed(0)}%;background:var(--green);border-radius:3px;"></div>
+      </div>
+      <div style="width:42px;color:var(--dim);">${(r.pOI/1000).toFixed(0)}k</div>
+    </div>`).join('');
+
+  // Full table
+  document.getElementById('oc-tbody').innerHTML=rows.map(r=>`
+    <tr class="${r.atm?'atm':''}">
+      <td style="color:var(--red);">${(r.cOI/1000).toFixed(0)}K</td>
+      <td style="color:var(--red);">${r.cLTP}</td>
+      <td class="strike">${r.strike}</td>
+      <td style="color:var(--green);">${r.pLTP}</td>
+      <td style="color:var(--green);">${(r.pOI/1000).toFixed(0)}K</td>
+     </tr>`).join('');
+}
+
+// ── News ─────────────────────────────────────────────────────────
+const NEWS=[
+  {id:1,hl:"RBI keeps repo rate unchanged at 6.5%, maintains accommodative stance",src:"Economic Times",time:"2h ago",cat:"Monetary Policy"},
+  {id:2,hl:"Sensex surges 800 pts as FII inflows hit 3-month high; Nifty reclaims 22,000",src:"Moneycontrol",time:"3h ago",cat:"Market Update"},
+  {id:3,hl:"Adani Group stocks fall 5-8% after US DOJ investigation reports",src:"Business Standard",time:"4h ago",cat:"Corporate"},
+  {id:4,hl:"India Q3 GDP growth at 7.6%, beats estimates; manufacturing drives growth",src:"CNBC TV18",time:"5h ago",cat:"Economy"},
+  {id:5,hl:"IT sector under pressure as US tech layoffs continue; TCS, Infosys weak",src:"Mint",time:"6h ago",cat:"Sectoral"},
+  {id:6,hl:"SEBI approves new F&O regulations to curb retail investor losses",src:"Financial Express",time:"8h ago",cat:"Regulation"},
+  {id:7,hl:"Oil prices drop to 3-month low; positive for India's current account deficit",src:"Reuters",time:"10h ago",cat:"Commodities"},
+  {id:8,hl:"Reliance Industries Q3 profit rises 11% YoY; Jio and retail show strong growth",src:"Bloomberg Quint",time:"12h ago",cat:"Corporate"},
+];
+const NEWS_AI_PROMPT=`You are an expert Indian stock market analyst. Analyze this NSE/BSE news headline and return ONLY a valid JSON object with no markdown or extra text:
+{"sentiment":"bullish"|"bearish"|"neutral","sentimentGuj":"તેજી"|"મંદી"|"તટસ્થ","score":<0-100>,"impact":"high"|"medium"|"low","impactGuj":"વધારે"|"મધ્યમ"|"ઓછો","summaryGuj":"<2 sentence Gujarati summary of market impact>","summaryEng":"<2 sentence English summary>","sectors":["sector1","sector2"],"recommendation":"<Gujarati buy/hold/sell/watch recommendation>"}`;
+
+let newsAnalyses={}, loadingNews=null, analyzeAllFlag=false;
+
+function buildNews() {
+  // Impact bars
+  const impacts=[
+    {idx:'NIFTY 50',pct:72,bull:true},{idx:'BANK NIFTY',pct:68,bull:true},
+    {idx:'SENSEX',pct:55,bull:true},{idx:'MIDCAP',pct:38,bull:false},{idx:'FIN NIFTY',pct:60,bull:true}
+  ];
+  document.getElementById('impact-bars').innerHTML=impacts.map(i=>`
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+      <div style="font-size:10px;font-weight:700;width:85px;flex-shrink:0;">${i.bull?'🟢':'🔴'} ${i.idx}</div>
+      <div style="flex:1;height:5px;background:var(--card2);border-radius:3px;overflow:hidden;">
+        <div style="height:100%;width:${i.pct}%;background:${i.bull?'var(--green)':'var(--red)'};border-radius:3px;"></div>
+      </div>
+      <div style="font-size:10px;font-weight:700;color:${i.bull?'var(--green)':'var(--red)'};width:36px;text-align:right;">${i.bull?'+':''}${i.pct}%</div>
+    </div>`).join('');
+
+  renderNews();
+}
+
+function renderNews() {
+  document.getElementById('news-container').innerHTML=NEWS.map(n=>{
+    const a=newsAnalyses[n.id];
+    const sentCol=a?a.sentiment==='bullish'?'var(--green)':a.sentiment==='bearish'?'var(--red)':'var(--blue)':'var(--border)';
+    const impCls=a?a.impact==='high'?'imp-hi':a.impact==='medium'?'imp-md':'imp-lo':'';
+    return`<div class="news-item" style="border-color:${sentCol};">
+      <div class="news-icon" style="background:${sentCol}22;border:1px solid ${sentCol}33;">
+        ${a?(a.sentiment==='bullish'?'📈':a.sentiment==='bearish'?'📉':'➡️'):'📰'}
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div class="news-src">${n.src}</div>
+        <div class="news-hl">${n.hl}</div>
+        <div class="news-meta">
+          <span class="news-time">🕐 ${n.time}</span>
+          <span class="tag" style="background:rgba(240,165,0,.1);color:var(--gold);border:1px solid rgba(240,165,0,.2);">${n.cat}</span>
+          ${a?`<span class="imp-badge ${impCls}">${a.impactGuj} IMPACT</span>`:''}
+        </div>
+        ${a?`<div class="ai-result">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+            <span style="font-size:18px;">${a.sentiment==='bullish'?'📈':a.sentiment==='bearish'?'📉':'➡️'}</span>
+            <div>
+              <div style="color:${sentCol};font-weight:700;font-size:12px;">${a.sentimentGuj}</div>
+              <div style="color:var(--dim);font-size:9px;">${a.sentiment} · Score: ${a.score}/100</div>
+            </div>
+            ${renderArc(a.score)}
+          </div>
+          <div class="ai-grid">
+            <div class="ai-box"><div class="ai-box-lbl">ગુજ. વિશ્લેષણ</div><div class="ai-box-txt">${a.summaryGuj}</div></div>
+            <div class="ai-box"><div class="ai-box-lbl">ENGLISH</div><div class="ai-box-txt">${a.summaryEng}</div></div>
+          </div>
+          <div class="reco-bar" style="background:${sentCol}18;border:1px solid ${sentCol}33;">
+            <span>💡</span><span style="color:var(--dim);font-size:9px;">સૂચના: </span><span style="color:${sentCol};font-size:11px;font-weight:700;">${a.recommendation}</span>
+          </div>
+        </div>`:
+        `<button class="ai-btn" style="margin-top:7px;font-size:9px;padding:4px 9px;" ${loadingNews?'disabled':''} onclick="analyzeOne(${n.id})">
+          ${loadingNews===n.id?'<span class="spin"></span> Analyzing...':'🤖 AI Analyze'}
+        </button>`}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderArc(score) {
+  const col=score>60?'var(--green)':score<40?'var(--red)':'var(--blue)';
+  const ang=(score/100)*180-90;
+  return`<svg viewBox="0 0 80 46" width="64" height="38" style="flex-shrink:0;">
+    <path d="M8 40 A32 32 0 0 1 72 40" fill="none" stroke="var(--border)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M8 40 A32 32 0 0 1 72 40" fill="none" stroke="${col}" stroke-width="6" stroke-linecap="round"
+      stroke-dasharray="${score} 100" style="filter:drop-shadow(0 0 4px ${col})"/>
+    <g transform="translate(40,40) rotate(${ang})">
+      <line x1="0" y1="0" x2="0" y2="-22" stroke="${col}" stroke-width="2" stroke-linecap="round"/>
+      <circle r="3" fill="${col}"/>
+    </g>
+    <text x="40" y="44" text-anchor="middle" fill="${col}" font-size="9" font-weight="bold" font-family="monospace">${score}</text>
+  </svg>`;
+}
+
+async function analyzeOne(id) {
+  if(loadingNews) return;
+  const n = NEWS.find(x=>x.id===id);
+  loadingNews = id;
+  renderNews();
+  try {
+    const res = await fetch("",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        model:"claude-sonnet-4-20250514",
+        max_tokens:1000,
+        system:NEWS_AI_PROMPT,
+        messages:[{role:"user",content:`Analyze: "${n.hl}" (${n.src}, ${n.cat})`}]
+      })
+    });
+    const data = await res.json();
+    const txt = data.content?.map(b=>b.text||'').join('')||'{}';
+    newsAnalyses[id] = JSON.parse(txt.replace(/```json|```/g,'').trim());
+  } catch(e){ console.error(e); }
+  loadingNews = null;
+  renderNews();
+}
+
+function analyzeAllNews() {
+  analyzeAllFlag = true;
+  runNextAnalysis();
+}
+async function runNextAnalysis() {
+  if(!analyzeAllFlag) return;
+  const next = NEWS.find(n=>!newsAnalyses[n.id]);
+  if(!next){ analyzeAllFlag=false; renderNews(); return; }
+  await analyzeOne(next.id);
+  runNextAnalysis();
+}
+
+// ── Chart ─────────────────────────────────────────────────────────
+let tvLoaded = false;
+function initTV(sym) {
+  const c = document.getElementById('tv-main');
+  c.innerHTML='';
+  const iframe = document.createElement('iframe');
+  iframe.src=`=${encodeURIComponent(sym)}&interval=5&hidesidetoolbar=0&theme=dark&style=1&timezone=Asia%2FKolkata&studies=RSI%40tv-basicstudies%1EMACD%40tv-basicstudies%1EBB%40tv-basicstudies`;
+  iframe.width='100%';iframe.height='320';iframe.frameBorder='0';
+  iframe.setAttribute('allowtransparency','true');iframe.setAttribute('scrolling','no');
+  c.appendChild(iframe);
+}
+function switchChart(sym,el) {
+  document.querySelectorAll('.tv-tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  initTV(sym);
+}
+
+// ── AI Buttons ────────────────────────────────────────────────────
+async function getAIFIIAnalysis() {
+  const box = document.getElementById('fii-ai-box');
+  box.style.display='block';
+  box.textContent='FII/DII AI analysis ચાલી રહ્યું છે... ⏳';
+  try {
+    const res = await fetch("",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        model:"claude-sonnet-4-20250514",max_tokens:700,
+        messages:[{role:"user",content:`Indian stock market FII/DII data analysis in Gujarati:
+FII Net: +₹2,840 Cr (Buy ₹12,450 Cr, Sell ₹9,610 Cr)
+DII Net: +₹1,520 Cr (Buy ₹8,940 Cr, Sell ₹7,420 Cr)
+Nifty: 24,198 (+0.59%)
+
+Provide: 1) Market direction impact 2) Short term outlook 3) Trading recommendation for NIFTY options 4) Risk factors.
+Keep it concise and in Gujarati with key English terms.`}]
+      })
+    });
+    const data = await res.json();
+    box.textContent = data.content?.map(b=>b.text||'').join('')||'Analysis failed';
+  } catch(e){ box.textContent='AI service unavailable. Try again.'; }
+}
+
+async function getAIAlerts() {
+  const box = document.getElementById('ai-alert-box');
+  box.style.display='block';
+  box.textContent='AI trading alerts generate થઈ રહ્યા છે... ⏳';
+  try {
+    const res = await fetch("",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        model:"claude-sonnet-4-20250514",max_tokens:800,
+        messages:[{role:"user",content:`Professional options trader. Generate 3-4 actionable trading alerts in Gujarati for:
+Nifty: 24,198 | RSI: 62.4 | EMA9>EMA21>EMA50 | MACD: Bullish cross | PCR: 1.18
+BankNifty: 52,340 | RSI: 68.2 | CE Strong
+FII: +₹2840 Cr net buyer
+Bollinger: Mid-squeeze forming
+Market: Open
+
+Format each alert with: Symbol, Entry, Target, SL, Reason, Risk (1-10).
+Include one Hero-Zero expiry play if PCR supports it. End with overall market bias.`}]
+      })
+    });
+    const data = await res.json();
+    box.textContent = data.content?.map(b=>b.text||'').join('')||'Alert generation failed';
+  } catch(e){ box.textContent='AI service unavailable. Try again.'; }
+}
+
+// ── Init ──────────────────────────────────────────────────────────
+buildSectors();
+buildOptionChain();
+buildNews();
+refreshMarket();
+setInterval(refreshMarket, 15000);
+</script>
+</body>
+</html>
+```
